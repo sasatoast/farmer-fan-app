@@ -14,14 +14,13 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 
-interface ExperiencePageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function ExperiencePage({ params }: ExperiencePageProps) {
-  const experience = getExperienceById(params.id);
+export default async function ExperiencePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const experience = getExperienceById(id);
 
   if (!experience) {
     notFound();
